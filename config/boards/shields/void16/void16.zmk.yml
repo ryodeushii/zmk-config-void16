@@ -1,0 +1,8 @@
+file_format: "1"
+id: void16
+name: VOID16
+type: shield
+url: https://github.com/ryodeushii/zmk-config-void16
+requires: [seeed_xiao_ble]
+features:
+  - keys

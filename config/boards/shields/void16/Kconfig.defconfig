@@ -1,9 +1,9 @@
     # Copyright (c) 2022 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-if SHIELD_REGAL
+if SHIELD_VOID16
 
 config ZMK_KEYBOARD_NAME
-    default "REGAL"
+    default "VOID16"
 
-endif # SHIELD_REGAL
+endif # SHIELD_VOID16
