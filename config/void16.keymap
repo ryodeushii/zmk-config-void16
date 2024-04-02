@@ -29,6 +29,27 @@
             bindings = <&kp LG(LS(S))>;
             label = "WIN_SCREEN_AREA";
         };
+
+        premiere_remove_next_gap: premiere_remove_next_gap {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(SEMICOLON) &kp X &kp LS(DEL)>;
+            label = "PREMIERE_REMOVE_NEXT_GAP";
+        };
+
+        premiere_redo: premiere_pro_redo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(Y))>;
+            label = "PREMIERE_PRO_REDO";
+        };
+
+        premiere_undo: premiere_pro_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Z)>;
+            label = "PREMIERE_PRO_UNDO";
+        };
     };
 
     // ───────────────────────────────────────────────────────────────────────────
@@ -47,6 +68,26 @@
         };
     };
 
+    behaviors {
+        layer_or_undo: layer_or_undo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_OR_UNDO";
+            bindings = <&mo>, <&premiere_undo>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        layer_or_redo: layer_or_redo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_OR_REDO";
+            bindings = <&mo>, <&premiere_redo>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -56,10 +97,10 @@
 
         default {
             bindings = <
-&lt 1 NUMBER_1  &lt 2 N2  &lt 3 NUMBER_3  &lt 4 NUMBER_4
-&kp N5          &kp N6    &kp N7          &kp N8
-&kp N9          &kp N0    &kp Q           &kp W
-&kp E           &kp R     &kp T           &kp Y
+&lt 1 NUMBER_1  &lt 2 N2  &layer_or_undo 3 0  &layer_or_redo 4 0
+&kp N5          &kp N6    &none               &none
+&kp N9          &kp N0    &kp Q               &kp W
+&none           &none     &kp T               &kp Y
             >;
         };
 
@@ -68,7 +109,7 @@
 &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans
+&trans  &trans  &trans  &premiere_remove_next_gap
             >;
         };
 
@@ -86,7 +127,7 @@
 &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans
+&trans  &trans  &trans  &kp NUMBER_3
             >;
         };
 
@@ -95,7 +136,7 @@
 &trans            &trans  &trans  &trans
 &trans            &trans  &trans  &trans
 &trans            &trans  &trans  &trans
-&win_screen_area  &trans  &trans  &trans
+&win_screen_area  &trans  &trans  &kp NUMBER_4
             >;
         };
     };
