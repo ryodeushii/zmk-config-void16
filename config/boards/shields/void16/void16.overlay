@@ -38,7 +38,7 @@
         label = "KSCAN";
         rows = <4>;
         columns = <4>;
-        wakeup-source;
+        // wakeup-source;
 
         matrix {
             kscan = <&kscan_matrix>;
